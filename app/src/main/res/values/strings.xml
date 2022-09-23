@@ -2,5 +2,7 @@
     <string name="app_name">CarPool</string>
     <string name="login_text">Login</string>
     <string name="to_text">to</string>
-    <string name="car_pool_text">Car Pool</string>
+    <string name="car_pool_text">CarPool</string>
+    <string name="login_button_text">LOGIN</string>
+    <string name="registration_link_text">Register new account</string>
 </resources>

@@ -8,5 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="car_pool_red">#FF8F1010</color>
+    <color name="carpool_red">#FF8F1010</color>
+    <color name="secondary_red">#EC1056</color>
+    <color name="carpool_red_light">#9C1700</color>
+    <color name="carpool_text">#422929</color>
 </resources>
