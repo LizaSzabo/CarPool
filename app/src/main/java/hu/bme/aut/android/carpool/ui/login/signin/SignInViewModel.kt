@@ -8,4 +8,9 @@ import javax.inject.Inject
 class SignInViewModel @Inject constructor(
     private val signInPresenter: SignInPresenter
 ) : RainbowCakeViewModel<SignInViewState>(Initial) {
+
+    fun validateUser(): Boolean{
+        //TODO: add actual authentication
+        return true
+    }
 }

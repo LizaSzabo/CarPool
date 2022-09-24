@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,6 +64,10 @@ class SignInFragment : RainbowCakeFragment<SignInViewState, SignInViewModel>() {
             }
             if (binding.passwordInput.text.isEmpty()) {
                 binding.passwordInput.error = "Password cannot be empty!"
+            }
+            if (viewModel.validateUser()) {
+                val action = SignInFragmentDirections.actionSignInFragmentToRegisterFragment()
+                findNavController().navigate(action)
             }
         }
     }
