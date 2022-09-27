@@ -5,5 +5,9 @@
     <string name="car_pool_text">CarPool</string>
     <string name="login_button_text">LOGIN</string>
     <string name="registration_link_text">Register new account</string>
-    <string name="register">Register Your Account</string>
+    <string name="register_title">Register Your Account</string>
+    <string name="password_again_text">Password again:</string>
+    <string name="user_name_text">User Name:</string>
+    <string name="password_text">Password:</string>
+    <string name="register_your_account_text">Register your account</string>
 </resources>

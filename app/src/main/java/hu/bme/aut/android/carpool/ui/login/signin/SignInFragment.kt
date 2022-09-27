@@ -6,7 +6,6 @@ import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
@@ -53,20 +52,24 @@ class SignInFragment : RainbowCakeFragment<SignInViewState, SignInViewModel>() {
         binding.registrationLink.text = mSpannableString
 
         binding.registrationLink.setOnClickListener {
-            Toast.makeText(context, "Go to registration", Toast.LENGTH_LONG).show()
+            val action = SignInFragmentDirections.actionSignInFragmentToRegisterFragment()
+            findNavController().navigate(action)
         }
     }
 
     private fun setupLoginButton() {
         binding.loginButton.setOnClickListener {
+            var error = false
             if (binding.userNameInput.text.isEmpty()) {
                 binding.userNameInput.error = "User name cannot be empty!"
+                error = true
             }
             if (binding.passwordInput.text.isEmpty()) {
                 binding.passwordInput.error = "Password cannot be empty!"
+                error = true
             }
-            if (viewModel.validateUser()) {
-                val action = SignInFragmentDirections.actionSignInFragmentToRegisterFragment()
+            if (viewModel.validateUser() && !error) {
+                val action = SignInFragmentDirections.actionSignInFragmentToActualitiesFragment()
                 findNavController().navigate(action)
             }
         }
