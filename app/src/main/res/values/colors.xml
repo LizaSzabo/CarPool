@@ -12,4 +12,5 @@
     <color name="secondary_red">#EC1056</color>
     <color name="carpool_red_light">#9C1700</color>
     <color name="carpool_text">#422929</color>
+    <color name="light_background_red">#FAADAD</color>
 </resources>
