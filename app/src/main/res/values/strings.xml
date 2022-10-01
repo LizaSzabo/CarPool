@@ -21,4 +21,7 @@
     <string name="actualities_page_title">Actualities</string>
     <string name="profile_page_title">Profile</string>
     <string name="group_page_title">My group</string>
+    <string name="time_of_departure_label_text">Time of departure:</string>
+    <string name="taken_seats_available_seats">Taken seats/available seats:</string>
+    <string name="carpool_application_text">CarPool Application</string>
 </resources>

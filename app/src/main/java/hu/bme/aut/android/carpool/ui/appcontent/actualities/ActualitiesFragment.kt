@@ -35,7 +35,6 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-
     }
 
     override fun render(viewState: ActualitiesViewState) {

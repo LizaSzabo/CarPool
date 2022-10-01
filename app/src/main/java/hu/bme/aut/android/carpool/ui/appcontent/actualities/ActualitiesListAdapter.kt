@@ -28,6 +28,7 @@ class ActualitiesListAdapter :
         AnnouncementItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
+
     )
 
 
