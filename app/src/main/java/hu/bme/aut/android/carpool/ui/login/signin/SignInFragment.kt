@@ -1,5 +1,6 @@
 package hu.bme.aut.android.carpool.ui.login.signin
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
@@ -12,6 +13,7 @@ import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentSigninBinding
+import hu.bme.aut.android.carpool.ui.appcontent.actualities.ContentActivity
 
 @AndroidEntryPoint
 class SignInFragment : RainbowCakeFragment<SignInViewState, SignInViewModel>() {
@@ -69,8 +71,7 @@ class SignInFragment : RainbowCakeFragment<SignInViewState, SignInViewModel>() {
                 error = true
             }
             if (viewModel.validateUser() && !error) {
-                val action = SignInFragmentDirections.actionSignInFragmentToActualitiesFragment()
-                findNavController().navigate(action)
+               startActivity(Intent(activity, ContentActivity::class.java))
             }
         }
     }

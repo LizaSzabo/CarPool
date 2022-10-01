@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import hu.bme.aut.android.carpool.ui.appcontent.actualities.databinding.FragmentSlideshowBinding
+import hu.bme.aut.android.carpool.databinding.FragmentSlideshowBinding
 
 class SlideshowFragment : Fragment() {
 

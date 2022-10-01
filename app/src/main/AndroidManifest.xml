@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarPool" >
         <activity
-            android:name=".ContentActivity"
+            android:name=".ui.appcontent.actualities.ContentActivity"
             android:exported="false"
             android:label="@string/title_activity_content"
             android:theme="@style/Theme.CarPool.NoActionBar" >
