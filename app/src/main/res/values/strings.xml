@@ -20,4 +20,5 @@
 
     <string name="actualities_page_title">Actualities</string>
     <string name="profile_page_title">Profile</string>
+    <string name="group_page_title">My group</string>
 </resources>

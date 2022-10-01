@@ -14,5 +14,11 @@
     <fragment
         android:id="@+id/actualitiesFragment"
         android:name="hu.bme.aut.android.carpool.ui.appcontent.actualities.ActualitiesFragment"
-        android:label="@string/actualities_page_title" />
+        android:label="@string/actualities_page_title"
+        tools:layout="@layout/fragment_actualities" />
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="hu.bme.aut.android.carpool.ui.appcontent.group.GroupFragment"
+        android:label="@string/group_page_title"
+        tools:layout="@layout/fragment_group" />
 </navigation>
