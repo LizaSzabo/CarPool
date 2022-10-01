@@ -1,4 +1,4 @@
-package hu.bme.aut.android.carpool.actualities
+package hu.bme.aut.android.carpool.ui.appcontent.actualities
 
 import android.os.Bundle
 import android.view.LayoutInflater

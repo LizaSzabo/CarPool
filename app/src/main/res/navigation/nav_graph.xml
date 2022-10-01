@@ -21,6 +21,6 @@
         android:label="RegisterFragment" />
     <fragment
         android:id="@+id/actualitiesFragment"
-        android:name="hu.bme.aut.android.carpool.actualities.ActualitiesFragment"
+        android:name="hu.bme.aut.android.carpool.ui.appcontent.actualities.ActualitiesFragment"
         android:label="ActualitiesFragment" />
 </navigation>

@@ -1,4 +1,4 @@
-package hu.bme.aut.android.carpool.actualities
+package hu.bme.aut.android.carpool.ui.appcontent.actualities
 
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -11,6 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarPool">
         <activity
+            android:name=".ContentActivity"
+            android:exported="false"
+            android:label="@string/title_activity_content"
+            android:theme="@style/Theme.CarPool.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
