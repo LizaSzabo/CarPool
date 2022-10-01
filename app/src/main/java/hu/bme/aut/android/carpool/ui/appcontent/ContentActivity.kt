@@ -1,4 +1,4 @@
-package hu.bme.aut.android.carpool.ui.appcontent.actualities
+package hu.bme.aut.android.carpool.ui.appcontent
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
@@ -38,17 +38,13 @@ private lateinit var binding: ActivityContentBinding
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment_content_content) as NavHostFragment
         val navController = navHostFragment.navController
-        //val navController = findNavController(R.id.nav_host_fragment_content_content)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.actualitiesFragment, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
+            R.id.actualitiesFragment, R.id.profileFragment, R.id.nav_slideshow), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.content, menu)
         return true
     }

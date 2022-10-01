@@ -6,18 +6,13 @@
     app:startDestination="@id/actualitiesFragment">
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="hu.bme.aut.android.carpool.ui.appcontent.actualities.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/profileFragment"
+        android:name="hu.bme.aut.android.carpool.ui.appcontent.profile.ProfileFragment"
+        android:label="@string/profile_page_title"
+        tools:layout="@layout/fragment_profile" />
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="hu.bme.aut.android.carpool.ui.appcontent.actualities.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
     <fragment
         android:id="@+id/actualitiesFragment"
         android:name="hu.bme.aut.android.carpool.ui.appcontent.actualities.ActualitiesFragment"
-        android:label="ActualitiesFragment" />
+        android:label="@string/actualities_page_title" />
 </navigation>

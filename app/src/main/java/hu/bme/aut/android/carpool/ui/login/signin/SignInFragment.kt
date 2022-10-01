@@ -13,7 +13,7 @@ import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentSigninBinding
-import hu.bme.aut.android.carpool.ui.appcontent.actualities.ContentActivity
+import hu.bme.aut.android.carpool.ui.appcontent.ContentActivity
 
 @AndroidEntryPoint
 class SignInFragment : RainbowCakeFragment<SignInViewState, SignInViewModel>() {
