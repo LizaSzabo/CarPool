@@ -8,4 +8,13 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val profilePresenter: ProfilePresenter
-) : RainbowCakeViewModel<ProfileViewState>(InitialProfileState) {}
+) : RainbowCakeViewModel<ProfileViewState>(InitialProfileState) {
+
+    fun switchToEditMode() {
+        viewState = ProfileEditingState
+    }
+
+    fun switchToSavedMode() {
+        viewState = ProfileSuccessfullyEditedState
+    }
+}

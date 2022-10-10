@@ -24,4 +24,6 @@
     <string name="time_of_departure_label_text">Time of departure:</string>
     <string name="taken_seats_available_seats">Taken seats/available seats:</string>
     <string name="carpool_application_text">CarPool Application</string>
+    <string name="edit_button_text">Edit</string>
+    <string name="save_button_text">Save</string>
 </resources>

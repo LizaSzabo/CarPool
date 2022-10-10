@@ -18,7 +18,23 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
     override fun getViewResource() = R.layout.fragment_profile
 
     override fun render(viewState: ProfileViewState) {
-        // TODO("Not yet implemented")
+        when (viewState) {
+            is InitialProfileState -> {
+                binding.userNameEditText.visibility = View.INVISIBLE
+                binding.userNameText.visibility = View.VISIBLE
+                binding.profileImage.isEnabled = false
+            }
+            is ProfileEditingState -> {
+                binding.userNameEditText.visibility = View.VISIBLE
+                binding.userNameText.visibility = View.INVISIBLE
+                binding.profileImage.isEnabled = true
+            }
+            is ProfileSuccessfullyEditedState -> {
+                binding.userNameEditText.visibility = View.INVISIBLE
+                binding.userNameText.visibility = View.VISIBLE
+                binding.profileImage.isEnabled = false
+            }
+        }
     }
 
     override fun onCreateView(
@@ -34,6 +50,14 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.editProfileButton.setOnClickListener {
+            if (!binding.editProfileButton.isChecked) {
+                viewModel.switchToSavedMode()
+            } else {
+                viewModel.switchToEditMode()
+            }
+
+        }
 
     }
 
