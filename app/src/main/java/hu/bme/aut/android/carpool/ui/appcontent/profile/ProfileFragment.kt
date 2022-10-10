@@ -23,16 +23,19 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                 binding.userNameEditText.visibility = View.INVISIBLE
                 binding.userNameText.visibility = View.VISIBLE
                 binding.profileImage.isEnabled = false
+                binding.addGroupMemberButton.visibility = View.INVISIBLE
             }
             is ProfileEditingState -> {
                 binding.userNameEditText.visibility = View.VISIBLE
                 binding.userNameText.visibility = View.INVISIBLE
                 binding.profileImage.isEnabled = true
+                binding.addGroupMemberButton.visibility = View.VISIBLE
             }
             is ProfileSuccessfullyEditedState -> {
                 binding.userNameEditText.visibility = View.INVISIBLE
                 binding.userNameText.visibility = View.VISIBLE
                 binding.profileImage.isEnabled = false
+                binding.addGroupMemberButton.visibility = View.INVISIBLE
             }
         }
     }

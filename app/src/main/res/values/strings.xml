@@ -27,4 +27,5 @@
     <string name="edit_button_text">Edit</string>
     <string name="save_button_text">Save</string>
     <string name="profile_picture_content_description">Profile picture</string>
+    <string name="add_group_member_button_text">Add group member</string>
 </resources>
