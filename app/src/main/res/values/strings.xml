@@ -28,4 +28,5 @@
     <string name="save_button_text">Save</string>
     <string name="profile_picture_content_description">Profile picture</string>
     <string name="add_group_member_button_text">Add group member</string>
+    <string name="email_address_label_text">Email address:</string>
 </resources>

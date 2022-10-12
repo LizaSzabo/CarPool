@@ -1,7 +1,10 @@
 package hu.bme.aut.android.carpool
 
+import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.FirebaseApp
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.databinding.ActivityMainBinding
 
