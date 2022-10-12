@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +36,6 @@ class RegisterFragment : RainbowCakeFragment<RegisterViewState, RegisterViewMode
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         firebaseAuth = FirebaseAuth.getInstance()
         setupRegisterButton()
     }
@@ -52,7 +51,7 @@ class RegisterFragment : RainbowCakeFragment<RegisterViewState, RegisterViewMode
     }
 
     private fun register() {
-        if (formIsValid()) {
+        if (!formIsValid()) {
             firebaseAuth
                 .createUserWithEmailAndPassword(
                     binding.userEmailInput.text.toString(),
@@ -65,19 +64,32 @@ class RegisterFragment : RainbowCakeFragment<RegisterViewState, RegisterViewMode
                         .setDisplayName(firebaseUser?.email?.substringBefore('@'))
                         .build()
                     firebaseUser?.updateProfile(profileChangeRequest)
-                    showAlterDiagram("Registration succeeded")
-
+                    showAlterDiagram(
+                        "Registration succeeded",
+                        "Go to login",
+                        R.style.GreenAlertDialogTheme
+                    )
                 }
                 .addOnFailureListener { exception ->
-                    showAlterDiagram("Registration failed: $exception")
+                    showAlterDiagram(
+                        "Registration failed:",
+                        exception.message.toString(),
+                        R.style.RedAlertDialogTheme
+                    )
                 }
         }
     }
 
-    private fun showAlterDiagram(title: String) {
-        AlertDialog.Builder(requireContext())
+    private fun showAlterDiagram(title: String, message: String, dialogStyleId: Int) {
+        AlertDialog.Builder(requireContext(), dialogStyleId)
             .setTitle(title)
-            .setPositiveButton("OK", null)
+            .setMessage(message)
+            .setPositiveButton("OK") { dialogInterface, i ->
+                when (dialogStyleId) {
+                    R.style.RedAlertDialogTheme -> {}
+                    R.style.GreenAlertDialogTheme -> findNavController().popBackStack()
+                }
+            }
             .show()
     }
 
@@ -97,6 +109,10 @@ class RegisterFragment : RainbowCakeFragment<RegisterViewState, RegisterViewMode
         }
         if (binding.passwordRepeatInput.text.isEmpty()) {
             binding.passwordRepeatInput.error = "Password cannot be empty!"
+            error = true
+        }
+        if (binding.passwordRepeatInput.text != binding.passwordInput.text) {
+            binding.passwordRepeatInput.error = "Passwords are not identical"
             error = true
         }
         return error

@@ -17,6 +17,12 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="GreenAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/success_green</item>
+    </style>
+    <style name="RedAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/failed_red</item>
+    </style>
     <style name="Theme.CarPool.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.CarPool.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

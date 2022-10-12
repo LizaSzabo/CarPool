@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentSigninBinding
@@ -72,7 +71,7 @@ class SignInFragment : RainbowCakeFragment<SignInViewState, SignInViewModel>() {
                 error = true
             }
             if (viewModel.validateUser() && !error) {
-               startActivity(Intent(activity, ContentActivity::class.java))
+                startActivity(Intent(activity, ContentActivity::class.java))
             }
         }
     }

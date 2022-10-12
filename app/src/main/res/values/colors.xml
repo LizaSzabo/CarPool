@@ -13,4 +13,7 @@
     <color name="carpool_red_light">#9C1700</color>
     <color name="carpool_text">#422929</color>
     <color name="light_background_red">#FAADAD</color>
+
+    <color name="success_green">#54F55C</color>
+    <color name="failed_red">#F38A9A</color>
 </resources>
