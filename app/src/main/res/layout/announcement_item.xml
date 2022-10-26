@@ -81,8 +81,8 @@
                     android:layout_marginEnd="1dp"
                     android:background="@drawable/announcement_card_border"
                     android:paddingVertical="4dp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:text="Taken"
                     android:textSize="20sp" />
 
@@ -92,8 +92,8 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/announcement_card_border"
                     android:paddingVertical="4dp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:text="Free"
                     android:textSize="20sp" />
 
