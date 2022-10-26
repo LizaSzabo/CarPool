@@ -12,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentActualitiesBinding
 import hu.bme.aut.android.carpool.model.Announcement
-import hu.bme.aut.android.carpool.ui.appcontent.ContentActivity
 
 
 @AndroidEntryPoint
@@ -62,7 +61,7 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
     }
 
     private fun setupFloatingButton() {
-        (activity as ContentActivity).getBindingObject().appBarContent.fab.setOnClickListener {
+        binding.fab.setOnClickListener {
             val action =
                 ActualitiesFragmentDirections.actionActualitiesFragmentToAddAnnouncementDialog()
             findNavController().navigate(action)

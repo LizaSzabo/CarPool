@@ -9,7 +9,6 @@ import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.DialogAddAnnouncementBinding
-import hu.bme.aut.android.carpool.databinding.FragmentActualitiesBinding
 
 @AndroidEntryPoint
 class AddAnnouncementDialog :
@@ -25,12 +24,13 @@ class AddAnnouncementDialog :
         savedInstanceState: Bundle?
     ): View {
         binding = DialogAddAnnouncementBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.root.setBackgroundResource(R.drawable.dialog_background)
     }
 
     override fun render(viewState: AddAnnouncementViewState) {

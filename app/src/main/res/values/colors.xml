@@ -16,4 +16,6 @@
 
     <color name="success_green">#54F55C</color>
     <color name="failed_red">#F38A9A</color>
+
+    <color name="transparent">#000000</color>
 </resources>
