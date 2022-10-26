@@ -15,10 +15,18 @@
         android:id="@+id/actualitiesFragment"
         android:name="hu.bme.aut.android.carpool.ui.appcontent.actualities.ActualitiesFragment"
         android:label="@string/actualities_page_title"
-        tools:layout="@layout/fragment_actualities" />
+        tools:layout="@layout/fragment_actualities" >
+        <action
+            android:id="@+id/action_actualitiesFragment_to_addAnnouncementDialog"
+            app:destination="@id/addAnnouncementDialog" />
+    </fragment>
     <fragment
         android:id="@+id/groupFragment"
         android:name="hu.bme.aut.android.carpool.ui.appcontent.group.GroupFragment"
         android:label="@string/group_page_title"
         tools:layout="@layout/fragment_group" />
+    <dialog
+        android:id="@+id/addAnnouncementDialog"
+        android:name="hu.bme.aut.android.carpool.ui.appcontent.addannouncement.AddAnnouncementDialog"
+        android:label="AddAnnouncementDialog" />
 </navigation>

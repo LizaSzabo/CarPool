@@ -57,4 +57,6 @@ class ContentActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_content)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+    fun getBindingObject(): ActivityContentBinding = binding
 }
