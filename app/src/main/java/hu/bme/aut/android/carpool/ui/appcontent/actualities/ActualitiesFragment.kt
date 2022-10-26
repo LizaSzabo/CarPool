@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentActualitiesBinding
 import hu.bme.aut.android.carpool.model.Announcement
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -37,6 +38,12 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
 
         setupRecyclerView()
         setupFloatingButton()
+    }
+
+    private fun refresh() {
+        Timber.i("ActualitiesFragment refresh")
+
+        viewModel.loadAnnouncements()
     }
 
     override fun render(viewState: ActualitiesViewState) {

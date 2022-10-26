@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/transparent"
     android:minWidth="360dp"
     android:minHeight="360dp">
 
-    <TextView
+    <EditText
         android:id="@+id/tvUserName"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Username"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:text=""
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvNameLabel"
         app:layout_constraintStart_toEndOf="@+id/tvNameLabel"
-        app:layout_constraintTop_toTopOf="@+id/tvNameLabel" />
+        app:layout_constraintTop_toTopOf="@+id/tvNameLabel"
+        tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/buttonSave"
@@ -23,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="16dp"
-        android:text="Save"
+        android:text="@string/save_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -32,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
-        android:text="Cancel"
+        android:text="@string/cancel_button_text"
         app:layout_constraintBottom_toBottomOf="@+id/buttonSave"
         app:layout_constraintEnd_toStartOf="@+id/buttonSave" />
 
@@ -42,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
-        android:text="Name:"
+        android:text="@string/name_label_text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addNewAnnouncementTitle" />
@@ -75,21 +80,54 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="28dp"
-        android:text="Add new announcement"
+        android:text="@string/add_new_announcement"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etTime"
-        android:layout_width="72dp"
+        android:layout_width="84dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:background="@drawable/time_field_background"
+        android:importantForAutofill="no"
+        android:inputType="time"
         android:text=""
         android:textSize="20sp"
-        android:inputType="time"
         app:layout_constraintBottom_toTopOf="@+id/tvTakenAvailableSeats"
         app:layout_constraintStart_toEndOf="@+id/tvTimeOfDeparture"
-        app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvUserName"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/etTakenSeatsNumber"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/time_field_background"
+        android:hint="0"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:text=""
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTakenAvailableSeats"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/etAvailableSeatsNumber"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/time_field_background"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:text=""
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/etTakenSeatsNumber"
+        app:layout_constraintTop_toBottomOf="@+id/tvTakenAvailableSeats"
+        tools:ignore="LabelFor" />
 </androidx.constraintlayout.widget.ConstraintLayout>

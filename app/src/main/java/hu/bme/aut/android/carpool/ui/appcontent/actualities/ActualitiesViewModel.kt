@@ -8,4 +8,18 @@ import javax.inject.Inject
 @HiltViewModel
 class ActualitiesViewModel @Inject constructor(
     private val actualitiesPresenter: ActualitiesPresenter
-) : RainbowCakeViewModel<ActualitiesViewState>(Initial) {}
+) : RainbowCakeViewModel<ActualitiesViewState>(Initial) {
+
+    fun loadAnnouncements() {
+        viewState = DataLoading()
+
+        //TODO: real value of loading from firebase
+        val success = true
+
+        viewState = if (success) {
+            DataReady()
+        } else {
+            NetworkError()
+        }
+    }
+}
