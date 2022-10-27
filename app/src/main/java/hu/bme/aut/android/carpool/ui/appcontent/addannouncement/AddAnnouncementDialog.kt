@@ -12,7 +12,7 @@ import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.DialogAddAnnouncementBinding
-import hu.bme.aut.android.carpool.model.Announcement
+import hu.bme.aut.android.carpool.domain.model.Announcement
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,6 +48,10 @@ class AddAnnouncementDialog :
             is Initial -> {}
             is AddAnnouncementSaving -> {}
             is AddAnnouncementSuccess -> {
+                findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                    "fromNewAnnouncement",
+                    true
+                )
                 findNavController().popBackStack()
             }
             is AddAnnouncementFail -> {}

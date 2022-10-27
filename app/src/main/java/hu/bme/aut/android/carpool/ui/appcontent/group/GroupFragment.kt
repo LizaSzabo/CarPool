@@ -10,7 +10,7 @@ import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentGroupBinding
-import hu.bme.aut.android.carpool.model.User
+import hu.bme.aut.android.carpool.domain.model.User
 
 
 @AndroidEntryPoint

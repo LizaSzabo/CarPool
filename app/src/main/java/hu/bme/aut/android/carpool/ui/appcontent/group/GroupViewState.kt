@@ -1,6 +1,6 @@
 package hu.bme.aut.android.carpool.ui.appcontent.group
 
-import hu.bme.aut.android.carpool.model.User
+import hu.bme.aut.android.carpool.domain.model.User
 
 sealed class GroupViewState
 

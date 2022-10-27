@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.carpool.databinding.AnnouncementItemBinding
-import hu.bme.aut.android.carpool.model.Announcement
+import hu.bme.aut.android.carpool.domain.model.Announcement
 
 class ActualitiesListAdapter :
     ListAdapter<Announcement, ActualitiesListAdapter.AnnouncementViewHolder>(ItemCallBack) {

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.carpool.databinding.GroupMemberItemBinding
-import hu.bme.aut.android.carpool.model.User
+import hu.bme.aut.android.carpool.domain.model.User
 
 class GroupMemberListAdapter :
     ListAdapter<User, GroupMemberListAdapter.GroupMemberViewHolder>(ItemCallBack) {

@@ -11,7 +11,7 @@ import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentActualitiesBinding
-import hu.bme.aut.android.carpool.model.Announcement
+import hu.bme.aut.android.carpool.domain.model.Announcement
 import timber.log.Timber
 
 
@@ -38,6 +38,12 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
 
         setupRecyclerView()
         setupFloatingButton()
+
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Boolean>(
+            "fromNewAnnouncement"
+        )?.observe(viewLifecycleOwner) {
+            refresh()
+        }
     }
 
     private fun refresh() {

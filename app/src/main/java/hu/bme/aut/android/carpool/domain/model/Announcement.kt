@@ -1,4 +1,4 @@
-package hu.bme.aut.android.carpool.model
+package hu.bme.aut.android.carpool.domain.model
 
 data class Announcement(
     val ownerId: String,
