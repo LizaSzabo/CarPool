@@ -11,4 +11,6 @@ class AnnouncementRepository @Inject constructor() {
         return FirebaseFirestore.getInstance().collection("announcements").add(announcement).await()
     }
 
+    suspend fun getTodayAnnouncements() =
+        FirebaseFirestore.getInstance().collection("announcements")
 }

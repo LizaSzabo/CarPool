@@ -14,10 +14,10 @@ class AddAnnouncementViewModel @Inject constructor(
     private val addAnnouncementPresenter: AddAnnouncementPresenter
 ) : RainbowCakeViewModel<AddAnnouncementViewState>(Initial) {
 
-    private val uiScope = CoroutineScope(Dispatchers.Main)
+    private val scope = CoroutineScope(Dispatchers.Main)
 
     fun saveNewAnnouncement(announcement: Announcement) {
-        uiScope.launch {
+        scope.launch {
             viewState = when (addAnnouncementPresenter.saveNewAnnouncement(announcement)) {
                 1 -> AddAnnouncementSaving()
                 2 -> AddAnnouncementSuccess()

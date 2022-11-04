@@ -46,6 +46,11 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.loadAnnouncements()
+    }
+
     private fun refresh() {
         Timber.i("ActualitiesFragment refresh")
 
@@ -53,7 +58,15 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
     }
 
     override fun render(viewState: ActualitiesViewState) {
-        //TODO
+        when(viewState){
+            is Initial -> {}
+            is DataLoading -> {}
+            is DataReady -> {
+                Timber.i("Actualities DataReady")
+                actualitiesListAdapter.addAllAnnouncements(viewState.announcements)
+            }
+            is NetworkError->{ Timber.i("Actualities NetworkError")}
+        }
     }
 
     private fun setupRecyclerView() {
@@ -64,6 +77,7 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
             listOf(
                 Announcement(
                     "id",
+                    "Name",
                     "Name",
                     "10:00",
                     1,

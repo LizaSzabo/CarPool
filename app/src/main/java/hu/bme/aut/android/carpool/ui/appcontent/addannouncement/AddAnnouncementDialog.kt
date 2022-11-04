@@ -103,6 +103,7 @@ class AddAnnouncementDialog :
     private fun setupSaveButton() {
         binding.buttonSave.setOnClickListener {
             val announcement = Announcement(
+                "",
                 "1",
                 binding.tvUserName.text.toString(),
                 binding.etTime.text.toString(),
