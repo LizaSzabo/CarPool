@@ -73,18 +73,6 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
         actualitiesListAdapter = ActualitiesListAdapter()
         binding.rvActualities.layoutManager = LinearLayoutManager(context)
         binding.rvActualities.adapter = actualitiesListAdapter
-        actualitiesListAdapter.addAllAnnouncements(
-            listOf(
-                Announcement(
-                    "id",
-                    "Name",
-                    "Name",
-                    "10:00",
-                    1,
-                    4
-                )
-            )
-        )
     }
 
     private fun setupFloatingButton() {
