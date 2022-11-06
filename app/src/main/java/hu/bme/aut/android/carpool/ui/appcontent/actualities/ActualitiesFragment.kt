@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
@@ -11,7 +12,6 @@ import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentActualitiesBinding
-import hu.bme.aut.android.carpool.domain.model.Announcement
 import timber.log.Timber
 
 
@@ -58,14 +58,22 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
     }
 
     override fun render(viewState: ActualitiesViewState) {
-        when(viewState){
-            is Initial -> {}
-            is DataLoading -> {}
+        when (viewState) {
+            is Initial -> {
+                binding.loading.isVisible = true
+            }
+            is DataLoading -> {
+                binding.loading.isVisible = true
+            }
             is DataReady -> {
+                binding.loading.isVisible = false
                 Timber.i("Actualities DataReady")
                 actualitiesListAdapter.addAllAnnouncements(viewState.announcements)
             }
-            is NetworkError->{ Timber.i("Actualities NetworkError")}
+            is NetworkError -> {
+                binding.loading.isVisible = false
+                Timber.i("Actualities NetworkError")
+            }
         }
     }
 
