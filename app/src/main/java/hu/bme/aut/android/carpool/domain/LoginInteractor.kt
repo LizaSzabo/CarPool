@@ -3,6 +3,7 @@ package hu.bme.aut.android.carpool.domain
 import com.google.firebase.auth.AuthResult
 import hu.bme.aut.android.carpool.data.firebaserepository.LoginRepository
 import hu.bme.aut.android.carpool.domain.model.states.LoginHandleState
+import hu.bme.aut.android.carpool.domain.model.states.RegistrationHandleState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -21,7 +22,18 @@ class LoginInteractor @Inject constructor(
         if (loginResult.user != null) {
             emit(LoginHandleState.success(true))
         } else emit(LoginHandleState.failedNoUser("User doesn't exist"))
-    }.catch{
+    }.catch {
         emit(LoginHandleState.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun registerUser(mail: String, password: String) = flow {
+        emit(RegistrationHandleState.loading())
+
+        loginRepository.register(mail, password).await()
+
+        emit(RegistrationHandleState.success(true))
+    }.catch {
+        emit(RegistrationHandleState.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 }

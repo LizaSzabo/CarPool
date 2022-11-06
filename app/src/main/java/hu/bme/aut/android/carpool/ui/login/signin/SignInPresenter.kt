@@ -13,10 +13,10 @@ class SignInPresenter @Inject constructor(
         loginInteractor.loginUser(userEmail, password).collect { state ->
            message = when (state) {
                 is LoginHandleState.Loading -> {
-                    "1"
+                    "loading"
                 }
                 is LoginHandleState.Success -> {
-                    "2"
+                    "success"
                 }
                 is LoginHandleState.Failed -> {
                     state.message

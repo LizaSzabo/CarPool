@@ -11,4 +11,8 @@ class LoginRepository @Inject constructor() {
     fun signIn(mail: String, password: String): Task<AuthResult> {
         return firebaseAuth.signInWithEmailAndPassword(mail, password)
     }
+
+    fun register(mail: String, password: String): Task<AuthResult> {
+        return firebaseAuth.createUserWithEmailAndPassword(mail, password)
+    }
 }

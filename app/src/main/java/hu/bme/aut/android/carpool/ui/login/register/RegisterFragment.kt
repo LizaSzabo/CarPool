@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentRegisterBinding
@@ -41,7 +40,24 @@ class RegisterFragment : RainbowCakeFragment<RegisterViewState, RegisterViewMode
     }
 
     override fun render(viewState: RegisterViewState) {
-        // TODO Render state
+        when (viewState) {
+            is RegisterInitial -> {}
+            is RegisterLoading -> {}
+            is RegisterSuccess -> {
+                showAlterDiagram(
+                    "Registration succeeded",
+                    "Go to login",
+                    R.style.GreenAlertDialogTheme
+                )
+            }
+            is RegisterFail -> {
+                showAlterDiagram(
+                    "Registration failed:",
+                    viewState.message,
+                    R.style.RedAlertDialogTheme
+                )
+            }
+        }
     }
 
     private fun setupRegisterButton() {
@@ -52,31 +68,10 @@ class RegisterFragment : RainbowCakeFragment<RegisterViewState, RegisterViewMode
 
     private fun register() {
         if (!formIsValid()) {
-            firebaseAuth
-                .createUserWithEmailAndPassword(
-                    binding.userEmailInput.text.toString(),
-                    binding.passwordInput.text.toString()
-                )
-                .addOnSuccessListener { result ->
-
-                    val firebaseUser = result.user
-                    val profileChangeRequest = UserProfileChangeRequest.Builder()
-                        .setDisplayName(firebaseUser?.email?.substringBefore('@'))
-                        .build()
-                    firebaseUser?.updateProfile(profileChangeRequest)
-                    showAlterDiagram(
-                        "Registration succeeded",
-                        "Go to login",
-                        R.style.GreenAlertDialogTheme
-                    )
-                }
-                .addOnFailureListener { exception ->
-                    showAlterDiagram(
-                        "Registration failed:",
-                        exception.message.toString(),
-                        R.style.RedAlertDialogTheme
-                    )
-                }
+            viewModel.registerUser(
+                binding.userEmailInput.text.toString(),
+                binding.passwordInput.text.toString()
+            )
         }
     }
 
@@ -84,7 +79,7 @@ class RegisterFragment : RainbowCakeFragment<RegisterViewState, RegisterViewMode
         AlertDialog.Builder(requireContext(), dialogStyleId)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton("OK") { dialogInterface, i ->
+            .setPositiveButton("OK") { _, i ->
                 when (dialogStyleId) {
                     R.style.RedAlertDialogTheme -> {}
                     R.style.GreenAlertDialogTheme -> findNavController().popBackStack()
