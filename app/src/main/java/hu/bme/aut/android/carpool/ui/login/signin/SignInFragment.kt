@@ -7,6 +7,7 @@ import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
@@ -45,7 +46,21 @@ class SignInFragment : RainbowCakeFragment<SignInViewState, SignInViewModel>() {
     }
 
     override fun render(viewState: SignInViewState) {
-        // TODO Render state
+        when (viewState) {
+            is Initial -> {
+                binding.loginButton.isEnabled = true
+            }
+            is Loading -> {
+                binding.loginButton.isEnabled = false
+            }
+            is LoginSuccess -> {
+                startActivity(Intent(activity, ContentActivity::class.java))
+            }
+            is LoginFail -> {
+                Toast.makeText(activity, viewState.message, Toast.LENGTH_LONG).show()
+                binding.loginButton.isEnabled = true
+            }
+        }
     }
 
     private fun setupRegisterLink() {
@@ -70,8 +85,11 @@ class SignInFragment : RainbowCakeFragment<SignInViewState, SignInViewModel>() {
                 binding.passwordInput.error = "Password cannot be empty!"
                 error = true
             }
-            if (viewModel.validateUser() && !error) {
-                startActivity(Intent(activity, ContentActivity::class.java))
+            if (!error) {
+                viewModel.validateUser(
+                    binding.userNameInput.text.toString(),
+                    binding.passwordInput.text.toString()
+                )
             }
         }
     }

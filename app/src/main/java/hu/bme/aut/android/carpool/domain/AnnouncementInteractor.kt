@@ -1,15 +1,14 @@
 package hu.bme.aut.android.carpool.domain
 
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import hu.bme.aut.android.carpool.data.firebaserepository.AnnouncementRepository
 import hu.bme.aut.android.carpool.domain.model.Announcement
 import hu.bme.aut.android.carpool.domain.model.states.AnnouncementHandlingState
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
-import timber.log.Timber
 import javax.inject.Inject
 
 class AnnouncementInteractor @Inject constructor(
