@@ -7,11 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\Liza\.android\avd\CarPooll.avd" />
+            <value value="C:\Users\Liza\.android\avd\carpool_api_33.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-11-04T17:30:18.290657300Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-11-07T10:03:13.200982Z" />
   </component>
 </project>
