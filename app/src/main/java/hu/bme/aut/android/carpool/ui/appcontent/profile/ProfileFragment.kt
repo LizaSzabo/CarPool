@@ -4,7 +4,7 @@ import android.Manifest.permission.READ_MEDIA_IMAGES
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -46,16 +46,31 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
             }
         }
 
-    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            val selectedImageUri: Uri? = data?.data
-            if (null != selectedImageUri) {
-                val yourBitmap: Bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, selectedImageUri)
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val selectedImageUri: Uri? = data?.data
+                if (null != selectedImageUri) {
+                    if (Build.VERSION.SDK_INT < 28) {
+                        @Suppress("DEPRECATION") val bitmap = MediaStore.Images.Media.getBitmap(
+                            context?.contentResolver,
+                            selectedImageUri
+                        )
+                        binding.profileImage.setImageBitmap(bitmap)
+                    } else {
+                        val source = context?.contentResolver?.let {
+                            ImageDecoder.createSource(
+                                it,
+                                selectedImageUri
+                            )
+                        }
+                        val bitmap = source?.let { ImageDecoder.decodeBitmap(it) }
+                        binding.profileImage.setImageBitmap(bitmap)
+                    }
+                }
             }
         }
-    }
-
 
     override fun render(viewState: ProfileViewState) {
         when (viewState) {
@@ -135,7 +150,6 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
         intent.action = Intent.ACTION_GET_CONTENT
         resultLauncher.launch(intent)
     }
-
 
 
 }

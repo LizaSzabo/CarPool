@@ -1,6 +1,8 @@
 package hu.bme.aut.android.carpool.domain
 
+import android.util.Log
 import com.google.firebase.auth.AuthResult
+import hu.bme.aut.android.carpool.CarPoolApplication.Companion.firebaseUser
 import hu.bme.aut.android.carpool.data.firebaserepository.LoginRepository
 import hu.bme.aut.android.carpool.domain.model.states.LoginHandleState
 import hu.bme.aut.android.carpool.domain.model.states.RegistrationHandleState
@@ -20,6 +22,7 @@ class LoginInteractor @Inject constructor(
         val loginResult: AuthResult = loginRepository.signIn(mail, password).await()
 
         if (loginResult.user != null) {
+            Log.i("currentUseeeer", firebaseUser.userEmail.toString())
             emit(LoginHandleState.success(true))
         } else emit(LoginHandleState.failedNoUser("User doesn't exist"))
     }.catch {
