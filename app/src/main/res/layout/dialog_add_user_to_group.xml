@@ -34,9 +34,9 @@
         android:id="@+id/etUserName"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/dialog_background"
+        android:background="@drawable/box_background_no_border"
         android:textSize="24sp"
         app:endIconMode="clear_text">
 
@@ -45,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/box_background_no_border"
+            android:textSize="22sp"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
