@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeDialogFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
+import hu.bme.aut.android.carpool.CarPoolApplication.Companion.currentUser
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.DialogAddAnnouncementBinding
 import hu.bme.aut.android.carpool.domain.model.Announcement
@@ -38,6 +39,7 @@ class AddAnnouncementDialog :
 
         binding.root.setBackgroundResource(R.drawable.dialog_background)
 
+        setupUserName()
         setupTimePicker()
         setupCancelButton()
         setupSaveButton()
@@ -103,18 +105,22 @@ class AddAnnouncementDialog :
     private fun setupSaveButton() {
         binding.buttonSave.setOnClickListener {
             val announcement = Announcement(
-                "",
-                "1",
-                binding.tvUserName.text.toString(),
-                binding.etTime.text.toString(),
-                if (binding.etTakenSeatsNumber.text.toString().isNotEmpty())
+                id = "",
+                owner = currentUser,
+                timeOfDeparture = binding.etTime.text.toString(),
+                takenSeatsNumber = if (binding.etTakenSeatsNumber.text.toString().isNotEmpty())
                     binding.etTakenSeatsNumber.text.toString().toInt()
                 else 0,
-                if (binding.etAvailableSeatsNumber.text.toString().isNotEmpty())
+                freeSeatsNumber = if (binding.etAvailableSeatsNumber.text.toString().isNotEmpty())
                     binding.etAvailableSeatsNumber.text.toString().toInt()
                 else 0,
+                date = Calendar.getInstance().toString()
             )
             viewModel.saveNewAnnouncement(announcement)
         }
+    }
+
+    private fun setupUserName(){
+        binding.tvUserName.text = currentUser.name ?: currentUser.email
     }
 }

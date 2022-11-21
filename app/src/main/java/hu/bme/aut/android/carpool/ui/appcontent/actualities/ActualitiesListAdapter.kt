@@ -36,7 +36,7 @@ class ActualitiesListAdapter :
         val announcement = announcements[position]
 
         holder.announcement = announcement
-        holder.tvOwnerName.text = announcement.ownerName
+        holder.tvOwnerName.text = announcement.owner?.name ?: announcement.owner?.email
         holder.tvTimeOfDeparture.text = announcement.timeOfDeparture
         holder.tvTakenSeatsNumber.text = announcement.takenSeatsNumber.toString()
         holder.tvFreeSeatsNumber.text = announcement.freeSeatsNumber.toString()

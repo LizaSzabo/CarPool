@@ -1,5 +1,6 @@
 package hu.bme.aut.android.carpool
 
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,10 +13,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT < 31)
+            setTheme(R.style.Theme_CarPool)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        CarPoolApplication.firebaseUser = FirebaseAuthentication()
+        CarPoolApplication.firebaseAuth = FirebaseAuthentication()
     }
 }

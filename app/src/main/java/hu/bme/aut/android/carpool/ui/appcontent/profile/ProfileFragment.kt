@@ -1,5 +1,6 @@
 package hu.bme.aut.android.carpool.ui.appcontent.profile
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.READ_MEDIA_IMAGES
 import android.app.Activity
 import android.content.Intent
@@ -17,6 +18,7 @@ import androidx.core.content.ContextCompat
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
+import hu.bme.aut.android.carpool.CarPoolApplication.Companion.currentUser
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentProfileBinding
 
@@ -83,6 +85,12 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                 binding.userNameEditText.visibility = View.VISIBLE
                 binding.userNameText.visibility = View.INVISIBLE
                 binding.profileImage.isEnabled = true
+                binding.userNameEditText.setText("add User Name")
+                if (currentUser.name?.isEmpty() == true) {
+                    binding.userNameEditText.setText("add User Name")
+                } else {
+                    binding.userNameEditText.setText(currentUser.name)
+                }
             }
             is ProfileSuccessfullyEditedState -> {
                 binding.userNameEditText.visibility = View.INVISIBLE
@@ -112,7 +120,6 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
             } else {
                 viewModel.switchToEditMode()
             }
-
         }
 
         binding.profileImage.setOnClickListener {
@@ -137,11 +144,12 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                     // The registered ActivityResultCallback gets the result of this request.
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                         requestPermissionLauncher.launch(READ_MEDIA_IMAGES)
+                    } else {
+                        requestPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
                     }
                 }
             }
         }
-
     }
 
     private fun openSomeActivityForResult() {

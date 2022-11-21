@@ -8,13 +8,11 @@
     android:minWidth="360dp"
     android:minHeight="360dp">
 
-    <EditText
+    <TextView
         android:id="@+id/tvUserName"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:importantForAutofill="no"
-        android:inputType="text"
         android:text=""
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvNameLabel"

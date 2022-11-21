@@ -7,13 +7,15 @@ import co.zsmb.rainbowcake.timber.TIMBER
 import co.zsmb.requirektx.bundle.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import hu.bme.aut.android.carpool.data.util.FirebaseAuthentication
+import hu.bme.aut.android.carpool.domain.model.User
 import timber.log.Timber
 
 @HiltAndroidApp
 class CarPoolApplication : Application() {
 
     companion object {
-        lateinit var firebaseUser: FirebaseAuthentication
+        lateinit var firebaseAuth: FirebaseAuthentication
+        lateinit var currentUser: User
     }
 
     override fun onCreate() {

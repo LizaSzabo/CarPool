@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
@@ -50,6 +51,10 @@ class GroupFragment : RainbowCakeFragment<GroupViewState, GroupViewModel>() {
                 User(
                     "id",
                     "Name",
+                    "Email",
+                    resources.getDrawable(R.drawable.default_profile_picture, resources.newTheme())
+                        .toBitmap(),
+                    false
                 )
             )
         )
