@@ -32,4 +32,7 @@
     <string name="add_new_announcement">Add new announcement</string>
     <string name="name_label_text">Name:</string>
     <string name="cancel_button_text">Cancel</string>
+    <string name="add_user_button_text">add user</string>
+    <string name="add_user_name_label_text">Add User Name</string>
+    <string name="add_user_to_group_title_text">Add User to Group</string>
 </resources>

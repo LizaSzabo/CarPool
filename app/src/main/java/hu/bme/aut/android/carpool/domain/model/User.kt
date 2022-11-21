@@ -8,4 +8,5 @@ data class User(
     val email: String? = null,
     val bitmap: Bitmap? = null,
     val hasTodayAnnouncement: Boolean? = null,
+    val group: List<Long> = listOf(),
 )

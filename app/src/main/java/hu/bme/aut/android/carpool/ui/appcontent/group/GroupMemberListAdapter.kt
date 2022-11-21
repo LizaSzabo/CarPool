@@ -40,7 +40,7 @@ class GroupMemberListAdapter :
     override fun getItemCount() = groupMembers.size
 
 
-    fun add(groupMember: List<User>) {
+    fun addAll(groupMember: List<User>) {
         groupMembers -= groupMembers
         groupMembers += groupMember
         submitList(groupMembers)

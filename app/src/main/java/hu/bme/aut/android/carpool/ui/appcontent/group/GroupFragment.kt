@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.graphics.drawable.toBitmap
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
@@ -36,6 +37,7 @@ class GroupFragment : RainbowCakeFragment<GroupViewState, GroupViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        setupAddButton()
     }
 
     override fun render(viewState: GroupViewState) {
@@ -46,7 +48,7 @@ class GroupFragment : RainbowCakeFragment<GroupViewState, GroupViewModel>() {
         groupMemberListAdapter = GroupMemberListAdapter()
         binding.rvGroupMembers.layoutManager = LinearLayoutManager(context)
         binding.rvGroupMembers.adapter = groupMemberListAdapter
-        groupMemberListAdapter.add(
+        groupMemberListAdapter.addAll(
             listOf(
                 User(
                     "id",
@@ -58,5 +60,11 @@ class GroupFragment : RainbowCakeFragment<GroupViewState, GroupViewModel>() {
                 )
             )
         )
+    }
+
+    private fun setupAddButton() {
+        binding.fab.setOnClickListener {
+            findNavController().navigate(GroupFragmentDirections.actionGroupFragmentToAddUserToGroupDialog())
+        }
     }
 }
