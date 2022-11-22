@@ -22,15 +22,17 @@ class AddUserToGroupViewModel @Inject constructor(
     private fun checkUserExists(input: String) {
         scope.launch {
             val userId = addUserToGroupPresenter.userExists(input)
-            if (userId != null) {
-                saveUser(userId)
-            } else {
-                viewState = ErrorNoUser("$input is not an existing user name")
+            if (userId != (-1).toString()) {
+                if (userId != null) {
+                    saveUser(userId)
+                } else {
+                    viewState = ErrorNoUser("$input is not an existing user name")
+                }
             }
         }
     }
 
-    private fun saveUser(userId: Long) {
+    private fun saveUser(userId: String) {
         scope.launch {
             when (addUserToGroupPresenter.saveUserIdToGroup(userId)) {
                 "success" -> {

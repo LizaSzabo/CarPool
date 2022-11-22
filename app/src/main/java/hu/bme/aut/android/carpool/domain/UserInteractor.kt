@@ -1,5 +1,7 @@
 package hu.bme.aut.android.carpool.domain
 
+import android.util.Log
+import com.google.firebase.firestore.ktx.toObjects
 import hu.bme.aut.android.carpool.data.firebaserepository.UserRepository
 import hu.bme.aut.android.carpool.domain.model.User
 import hu.bme.aut.android.carpool.domain.model.states.BackendHandleState
@@ -15,11 +17,19 @@ class UserInteractor @Inject constructor(
 
     fun uploadUser(user: User) = flow {
         emit(BackendHandleState.loading())
-        val postRef = userRepository.uploadUser(user)
-        emit(BackendHandleState.success(postRef))
+        val userRef = userRepository.uploadUser(user)
+        emit(BackendHandleState.success(userRef))
     }.catch {
         emit(BackendHandleState.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
 
+    fun getUserByName(userName: String) = flow {
+        emit(BackendHandleState.loading())
+        val users: List<User> = userRepository.getUser(userName).toObjects()
+        Log.i("users: ", users.toString())
+        emit(BackendHandleState.success(users.first()))
+    }.catch {
+        emit(BackendHandleState.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
 }

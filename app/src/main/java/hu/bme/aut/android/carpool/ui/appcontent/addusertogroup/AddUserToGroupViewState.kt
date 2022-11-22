@@ -4,7 +4,7 @@ sealed class AddUserToGroupViewState
 
 object Initial : AddUserToGroupViewState()
 
-class UserAddedSuccess(val userId: Long) : AddUserToGroupViewState()
+class UserAddedSuccess(val userId: String) : AddUserToGroupViewState()
 
 class UserAddedError(val errorMessage: String) : AddUserToGroupViewState()
 
