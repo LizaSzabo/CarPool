@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import co.zsmb.rainbowcake.base.RainbowCakeDialogFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,15 +32,36 @@ class AddUserToGroupDialog :
         super.onViewCreated(view, savedInstanceState)
 
         setupCancelButton()
+        setupSaveButton()
     }
 
     override fun render(viewState: AddUserToGroupViewState) {
-        // TODO("Not yet implemented")
+        when (viewState) {
+            is Initial -> {}
+            is UserAddedSuccess -> {
+                Toast.makeText(activity, R.string.user_added_success, Toast.LENGTH_LONG).show()
+                dismiss()
+            }
+            is UserAddedError -> {
+                Toast.makeText(activity, viewState.errorMessage, Toast.LENGTH_LONG).show()
+            }
+            is ErrorNoUser -> {
+                Toast.makeText(activity, viewState.errorMessage, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun setupCancelButton() {
         binding.btnCancel.setOnClickListener {
             dismiss()
+        }
+    }
+
+    private fun setupSaveButton() {
+        binding.btnSave.setOnClickListener {
+            if (binding.editTextUserName.text?.isNotEmpty() == true) {
+                viewModel.addUserToGroup(binding.editTextUserName.text.toString())
+            }
         }
     }
 

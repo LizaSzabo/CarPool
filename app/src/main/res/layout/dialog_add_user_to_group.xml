@@ -45,8 +45,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/box_background_no_border"
-            android:textSize="22sp"
-            android:inputType="text" />
+            android:inputType="text"
+            android:text=""
+            android:textSize="22sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,6 +60,7 @@
 
         <Button
             android:id="@+id/btnCancel"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -70,6 +72,7 @@
 
         <Button
             android:id="@+id/btnSave"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
