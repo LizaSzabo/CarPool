@@ -17,8 +17,8 @@ class AnnouncementInteractor @Inject constructor(
 
     fun saveNewAnnouncement(announcement: Announcement) = flow {
         emit(AnnouncementHandlingState.loading())
-        val postRef = announcementRepository.uploadAnnouncement(announcement)
-        emit(AnnouncementHandlingState.success(postRef))
+        val announcementRef = announcementRepository.uploadAnnouncement(announcement)
+        emit(AnnouncementHandlingState.success(announcementRef))
     }.catch {
         emit(AnnouncementHandlingState.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
