@@ -10,22 +10,16 @@ import javax.inject.Inject
 
 class UserRepository @Inject constructor() {
     suspend fun uploadUser(user: User) {
-        FirebaseFirestore.getInstance().collection("users").document(user.id!!).set(user)
-            .await()//.add(user).await()
+        FirebaseFirestore.getInstance().collection("users").document(user.email!!).set(user)
+            .await()
     }
 
     suspend fun getUser(userName: String): QuerySnapshot =
         FirebaseFirestore.getInstance().collection("users").whereEqualTo("name", userName).get()
             .await()
 
-    suspend fun updateUserGroup(userId: String, group: MutableList<String>) {
-        Log.i(
-            "documenttt: ",
-            FirebaseFirestore.getInstance().collection("users").document("1NjNW1CTDuY2S2KB0hiq")
-                .toString()
-        )
-        FirebaseFirestore.getInstance().collection("users").document("1NjNW1CTDuY2S2KB0hiq")
+    suspend fun updateUserGroup(email: String, group: MutableList<String>) {
+        FirebaseFirestore.getInstance().collection("users").document(email)
             .update("group", group).await()
-
     }
 }

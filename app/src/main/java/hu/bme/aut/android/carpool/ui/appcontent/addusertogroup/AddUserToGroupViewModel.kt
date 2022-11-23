@@ -1,6 +1,5 @@
 package hu.bme.aut.android.carpool.ui.appcontent.addusertogroup
 
-import android.util.Log
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -22,11 +21,10 @@ class AddUserToGroupViewModel @Inject constructor(
 
     private fun checkUserExists(input: String) {
         scope.launch {
-            val userId = addUserToGroupPresenter.userExists(input)
-            if (userId != (-1).toString()) {
-                if (userId != null) {
-                    Log.i("updatedUserGroup: ", userId)
-                    saveUser(userId)
+            val userName = addUserToGroupPresenter.userExists(input)
+            if (userName != (-1).toString()) {
+                if (userName != null) {
+                    saveUser(userName)
                 } else {
                     viewState = ErrorNoUser("$input is not an existing user name")
                 }
@@ -34,13 +32,12 @@ class AddUserToGroupViewModel @Inject constructor(
         }
     }
 
-    private fun saveUser(userId: String) {
+    private fun saveUser(userName: String) {
         scope.launch {
-            Log.i("updatedUserGroup: ", userId)
-            val value = addUserToGroupPresenter.saveUserIdToGroup(userId)
+            val value = addUserToGroupPresenter.saveUserIdToGroup(userName)
             when {
                 value == "success" -> {
-                    viewState = UserAddedSuccess(userId)
+                    viewState = UserAddedSuccess(userName)
                 }
                 value.contains("error") -> {
                     viewState = UserAddedError(value)

@@ -20,7 +20,7 @@ class SignInPresenter @Inject constructor(
                 }
                 is LoginHandleState.Success -> { currentUser = User(
                     id = firebaseAuth.uid,
-                    name = firebaseAuth.userName,
+                    name = firebaseAuth.userEmail?.substringBefore("@"),
                     email = firebaseAuth.userEmail,
                     hasTodayAnnouncement = false,
                 )

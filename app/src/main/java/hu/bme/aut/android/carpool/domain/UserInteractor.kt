@@ -34,11 +34,11 @@ class UserInteractor @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    fun addUserToGroupOfCurrentUser(userIdOfUserToAdd: String, groupToUpdate: MutableList<String>) =
+    fun addUserToGroupOfCurrentUser(emailOfUserToAdd: String, groupToUpdate: MutableList<String>) =
         flow {
             emit(BackendHandleState.loading())
             Log.i("updatedUserGroup: ", groupToUpdate.toString())
-            userRepository.updateUserGroup(userIdOfUserToAdd, groupToUpdate)
+            userRepository.updateUserGroup(emailOfUserToAdd, groupToUpdate)
             emit(BackendHandleState.success("update success"))
         }.catch {
             emit(BackendHandleState.failed(it.message.toString()))

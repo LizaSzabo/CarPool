@@ -1,6 +1,5 @@
 package hu.bme.aut.android.carpool.ui.login.register
 
-import hu.bme.aut.android.carpool.data.util.generateId
 import hu.bme.aut.android.carpool.domain.LoginInteractor
 import hu.bme.aut.android.carpool.domain.UserInteractor
 import hu.bme.aut.android.carpool.domain.model.User
@@ -33,7 +32,7 @@ class RegisterPresenter @Inject constructor(
 
     private suspend fun createUser(email: String): String {
         var message = "success"
-        val user = User(id = generateId(), email = email, name = email.substringBefore("@"))
+        val user = User(id = email, email = email, name = email.substringBefore("@"))
         userInteractor.uploadUser(user).collect { state ->
             message = when (state) {
                 is BackendHandleState.Loading -> {

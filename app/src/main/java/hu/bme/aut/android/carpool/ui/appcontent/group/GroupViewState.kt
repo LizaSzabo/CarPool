@@ -8,4 +8,4 @@ object GroupInitialState : GroupViewState()
 
 object GroupLoading : GroupViewState()
 
-class GroupLoaded(members: List<User>) : GroupViewState()
+class GroupLoaded(val members: MutableList<String>) : GroupViewState()

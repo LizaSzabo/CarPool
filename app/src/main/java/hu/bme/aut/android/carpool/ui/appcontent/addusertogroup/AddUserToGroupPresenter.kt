@@ -18,7 +18,7 @@ class AddUserToGroupPresenter @Inject constructor(
                     "-1"
                 }
                 is BackendHandleState.Success -> {
-                    state.data.id
+                    state.data.name
                 }
                 is BackendHandleState.Failed -> {
                     null
@@ -28,12 +28,12 @@ class AddUserToGroupPresenter @Inject constructor(
         return userId
     }
 
-    suspend fun saveUserIdToGroup(userId: String): String {
+    suspend fun saveUserIdToGroup(userName: String): String {
         var updateMessage = "loading"
         val updatedGroup = currentUser.group
         Log.i("updatedUserGroup: ", updatedGroup.toString())
-        updatedGroup.add(userId)
-        currentUser.id?.let {
+        updatedGroup.add(userName)
+        currentUser.email?.let {
             userInteractor.addUserToGroupOfCurrentUser(it, updatedGroup).collect { state ->
                 Log.i("updatedUserGroup: ", state.toString())
                 updateMessage = when (state) {
@@ -41,8 +41,8 @@ class AddUserToGroupPresenter @Inject constructor(
                         "loading"
                     }
                     is BackendHandleState.Success -> {
-                        currentUser.group.add(userId)
-                        state.data
+                        currentUser.group.add(userName)
+                        "success"
                     }
                     is BackendHandleState.Failed -> {
                         "error: " + state.message
