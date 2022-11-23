@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +16,8 @@ import hu.bme.aut.android.carpool.databinding.FragmentGroupBinding
 
 
 @AndroidEntryPoint
-class GroupFragment : RainbowCakeFragment<GroupViewState, GroupViewModel>() {
+class GroupFragment : RainbowCakeFragment<GroupViewState, GroupViewModel>(),
+    GroupMemberListAdapter.GroupMemberClickListener {
 
     private lateinit var binding: FragmentGroupBinding
     override fun provideViewModel() = getViewModelFromFactory()
@@ -52,11 +54,20 @@ class GroupFragment : RainbowCakeFragment<GroupViewState, GroupViewModel>() {
                 binding.loading.isVisible = false
                 groupMemberListAdapter.addAll(viewState.members)
             }
+            is UserDeleteError -> {
+                binding.loading.isVisible = false
+                Toast.makeText(activity, viewState.error, Toast.LENGTH_LONG).show()
+            }
+            is UserDeleteSuccess -> {
+                binding.loading.isVisible = false
+                groupMemberListAdapter.addAll(viewState.members)
+            }
         }
     }
 
     private fun setupRecyclerView() {
         groupMemberListAdapter = GroupMemberListAdapter()
+        groupMemberListAdapter.listener = this
         binding.rvGroupMembers.layoutManager = LinearLayoutManager(context)
         binding.rvGroupMembers.adapter = groupMemberListAdapter
     }
@@ -65,5 +76,9 @@ class GroupFragment : RainbowCakeFragment<GroupViewState, GroupViewModel>() {
         binding.fab.setOnClickListener {
             findNavController().navigate(GroupFragmentDirections.actionGroupFragmentToAddUserToGroupDialog())
         }
+    }
+
+    override fun onDeleteClick(userName: String) {
+        viewModel.deleteUserFromGroup(userName)
     }
 }

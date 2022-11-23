@@ -25,6 +25,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="28dp"
+        android:contentDescription="@string/add_new_user_to_your_group_decription_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_comment_24" />

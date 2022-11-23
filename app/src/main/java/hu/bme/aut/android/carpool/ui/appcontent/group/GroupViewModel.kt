@@ -1,6 +1,5 @@
 package hu.bme.aut.android.carpool.ui.appcontent.group
 
-import android.util.Log
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.android.carpool.CarPoolApplication.Companion.currentUser
@@ -17,12 +16,32 @@ class GroupViewModel @Inject constructor(
     private val scope = CoroutineScope(Dispatchers.Main)
 
     fun loadUsersList() {
+        viewState = GroupLoading
         scope.launch {
             val group = currentUser.name?.let { groupPresenter.getUserGroup(it) }
-            Log.i("group", currentUser.email.toString())
-            if (group != null && group.size > 0) {
+            if (group != null) {
                 currentUser.group = group
                 viewState = GroupLoaded(group)
+            }
+        }
+    }
+
+    fun deleteUserFromGroup(userName: String) {
+        viewState = GroupLoading
+        scope.launch {
+            val userEmail = groupPresenter.getEmailByName(userName)
+            if (userEmail == null) {
+                viewState = UserDeleteError("Error: delete not succeeded")
+            } else if (userEmail != "-1") {
+                val value = groupPresenter.deleteUserFromGroup(userName, userEmail)
+                viewState = when {
+                    value != null -> {
+                        UserDeleteSuccess(value)
+                    }
+                    else -> {
+                        UserDeleteError("Error: delete not succeeded")
+                    }
+                }
             }
         }
     }

@@ -1,6 +1,5 @@
 package hu.bme.aut.android.carpool.domain
 
-import android.util.Log
 import com.google.firebase.firestore.ktx.toObjects
 import hu.bme.aut.android.carpool.data.firebaserepository.UserRepository
 import hu.bme.aut.android.carpool.domain.model.User
@@ -27,17 +26,15 @@ class UserInteractor @Inject constructor(
     fun getUserByName(userName: String) = flow {
         emit(BackendHandleState.loading())
         val users: List<User> = userRepository.getUser(userName).toObjects()
-        Log.i("users: ", users.toString())
         emit(BackendHandleState.success(users.first()))
     }.catch {
         emit(BackendHandleState.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
 
-    fun addUserToGroupOfCurrentUser(emailOfUserToAdd: String, groupToUpdate: MutableList<String>) =
+    fun updateGroupOfCurrentUser(emailOfUserToAdd: String, groupToUpdate: MutableList<String>) =
         flow {
             emit(BackendHandleState.loading())
-            Log.i("updatedUserGroup: ", groupToUpdate.toString())
             userRepository.updateUserGroup(emailOfUserToAdd, groupToUpdate)
             emit(BackendHandleState.success("update success"))
         }.catch {

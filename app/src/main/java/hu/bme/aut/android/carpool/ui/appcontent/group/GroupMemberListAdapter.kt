@@ -3,6 +3,7 @@ package hu.bme.aut.android.carpool.ui.appcontent.group
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,11 +15,20 @@ class GroupMemberListAdapter :
     ListAdapter<String, GroupMemberListAdapter.GroupMemberViewHolder>(ItemCallBack) {
 
     var groupMembers = emptyList<String>()
+    lateinit var listener: GroupMemberClickListener
+
 
     inner class GroupMemberViewHolder(binding: GroupMemberItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val tvUserName: TextView = binding.userName
         var groupMember: String? = null
+        private val deleteIcon: ImageButton = binding.deleteImageButton
+
+        init {
+            deleteIcon.setOnClickListener {
+                listener.onDeleteClick(binding.userName.text.toString())
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GroupMemberViewHolder(
@@ -58,5 +68,9 @@ class GroupMemberListAdapter :
                 return oldItem == newItem
             }
         }
+    }
+
+    interface GroupMemberClickListener {
+        fun onDeleteClick(userName: String)
     }
 }
