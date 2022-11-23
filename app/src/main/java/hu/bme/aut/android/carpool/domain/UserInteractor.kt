@@ -32,4 +32,13 @@ class UserInteractor @Inject constructor(
     }.catch {
         emit(BackendHandleState.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
+
+
+    fun addUserToGroupOfCurrentUser(userIdOfUserToAdd: String, groupToUpdate: MutableList<String>) = flow{
+        emit(BackendHandleState.loading())
+        userRepository.updateUserGroup(userIdOfUserToAdd, groupToUpdate)
+        emit(BackendHandleState.success("update success"))
+    }.catch {
+        emit(BackendHandleState.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
 }
