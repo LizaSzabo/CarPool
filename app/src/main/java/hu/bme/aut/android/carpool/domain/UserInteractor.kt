@@ -17,8 +17,8 @@ class UserInteractor @Inject constructor(
 
     fun uploadUser(user: User) = flow {
         emit(BackendHandleState.loading())
-        val userRef = userRepository.uploadUser(user)
-        emit(BackendHandleState.success(userRef))
+        userRepository.uploadUser(user)
+        emit(BackendHandleState.success("success"))
     }.catch {
         emit(BackendHandleState.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
@@ -34,11 +34,13 @@ class UserInteractor @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    fun addUserToGroupOfCurrentUser(userIdOfUserToAdd: String, groupToUpdate: MutableList<String>) = flow{
-        emit(BackendHandleState.loading())
-        userRepository.updateUserGroup(userIdOfUserToAdd, groupToUpdate)
-        emit(BackendHandleState.success("update success"))
-    }.catch {
-        emit(BackendHandleState.failed(it.message.toString()))
-    }.flowOn(Dispatchers.IO)
+    fun addUserToGroupOfCurrentUser(userIdOfUserToAdd: String, groupToUpdate: MutableList<String>) =
+        flow {
+            emit(BackendHandleState.loading())
+            Log.i("updatedUserGroup: ", groupToUpdate.toString())
+            userRepository.updateUserGroup(userIdOfUserToAdd, groupToUpdate)
+            emit(BackendHandleState.success("update success"))
+        }.catch {
+            emit(BackendHandleState.failed(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
 }
