@@ -1,6 +1,5 @@
 package hu.bme.aut.android.carpool
 
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Thread.sleep(2000)
         setTheme(R.style.Theme_CarPool)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
