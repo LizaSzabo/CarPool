@@ -7,3 +7,7 @@ object InitialProfileState : ProfileViewState()
 object ProfileEditingState : ProfileViewState()
 
 object ProfileSuccessfullyEditedState : ProfileViewState()
+
+class ImageSavingError(val errorMessage: String) : ProfileViewState()
+
+class ImageSavingSuccess(val successMessage: String) : ProfileViewState()

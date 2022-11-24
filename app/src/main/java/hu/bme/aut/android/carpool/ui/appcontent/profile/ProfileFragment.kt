@@ -10,9 +10,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
@@ -60,6 +62,7 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                             selectedImageUri
                         )
                         binding.profileImage.setImageBitmap(bitmap)
+                        bitmap?.let { viewModel.saveImageToUser(it) }
                     } else {
                         val source = context?.contentResolver?.let {
                             ImageDecoder.createSource(
@@ -69,6 +72,7 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                         }
                         val bitmap = source?.let { ImageDecoder.decodeBitmap(it) }
                         binding.profileImage.setImageBitmap(bitmap)
+                        bitmap?.let { viewModel.saveImageToUser(it) }
                     }
                 }
             }
@@ -96,6 +100,13 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                 binding.userNameEditText.visibility = View.INVISIBLE
                 binding.userNameText.visibility = View.VISIBLE
                 binding.profileImage.isEnabled = false
+            }
+            is ImageSavingError -> {
+                Log.i("ImageSavingErrorstate", "ImageSavingError")
+                Toast.makeText(activity, viewState.errorMessage, Toast.LENGTH_LONG).show()
+            }
+            is ImageSavingSuccess -> {
+                Toast.makeText(activity, viewState.successMessage, Toast.LENGTH_LONG).show()
             }
         }
     }
