@@ -38,4 +38,8 @@
     <string name="user_added_success">User added successfully to your group</string>
     <string name="add_new_user_to_your_group_decription_text">add new user to your group</string>
     <string name="trash_bin_delete_button_description_text">trash bin delete button</string>
+    <string name="owner_label_text">Owner:</string>
+    <string name="register_to_the_announcement_button_text">Register</string>
+    <string name="taken_seats_label_taken">Taken seats:</string>
+    <string name="unregister_button_text">Unregister</string>
 </resources>

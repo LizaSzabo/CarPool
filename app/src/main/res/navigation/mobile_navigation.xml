@@ -15,7 +15,7 @@
         android:id="@+id/actualitiesFragment"
         android:name="hu.bme.aut.android.carpool.ui.appcontent.actualities.ActualitiesFragment"
         android:label="@string/actualities_page_title"
-        tools:layout="@layout/fragment_actualities" >
+        tools:layout="@layout/fragment_actualities">
         <action
             android:id="@+id/action_actualitiesFragment_to_addAnnouncementDialog"
             app:destination="@id/addAnnouncementDialog" />
@@ -24,7 +24,7 @@
         android:id="@+id/groupFragment"
         android:name="hu.bme.aut.android.carpool.ui.appcontent.group.GroupFragment"
         android:label="@string/group_page_title"
-        tools:layout="@layout/fragment_group" >
+        tools:layout="@layout/fragment_group">
         <action
             android:id="@+id/action_groupFragment_to_addUserToGroupDialog"
             app:destination="@id/addUserToGroupDialog" />
@@ -32,9 +32,11 @@
     <dialog
         android:id="@+id/addAnnouncementDialog"
         android:name="hu.bme.aut.android.carpool.ui.appcontent.addannouncement.AddAnnouncementDialog"
-        android:label="AddAnnouncementDialog" />
+        android:label="AddAnnouncementDialog"
+        tools:layout="@layout/dialog_add_announcement" />
     <dialog
         android:id="@+id/addUserToGroupDialog"
         android:name="hu.bme.aut.android.carpool.ui.appcontent.addusertogroup.AddUserToGroupDialog"
-        android:label="AddUserToGroupDialog" />
+        android:label="AddUserToGroupDialog"
+        tools:layout="@layout/dialog_add_user_to_group" />
 </navigation>
