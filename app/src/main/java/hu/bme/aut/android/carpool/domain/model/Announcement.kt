@@ -7,4 +7,5 @@ data class Announcement(
     val takenSeatsNumber: Int? = null,
     val freeSeatsNumber: Int? = null,
     val date: String? = null,
+    val registeredUsers: List<String> = listOf()
 )

@@ -11,3 +11,7 @@ object LoadingData : AnnouncementDetailsViewState()
 class DataLoaded(val announcement: Announcement) : AnnouncementDetailsViewState()
 
 class LoadingError(val errorMessage: String) : AnnouncementDetailsViewState()
+
+class UserRegistrationSuccess(val successMessage: String) : AnnouncementDetailsViewState()
+
+class UserUnRegistrationSuccess(val successMessage: String) : AnnouncementDetailsViewState()

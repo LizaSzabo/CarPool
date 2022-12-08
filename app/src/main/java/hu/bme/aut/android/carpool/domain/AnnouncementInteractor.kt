@@ -4,6 +4,7 @@ import com.google.firebase.firestore.ktx.toObjects
 import hu.bme.aut.android.carpool.data.firebaserepository.AnnouncementRepository
 import hu.bme.aut.android.carpool.domain.model.Announcement
 import hu.bme.aut.android.carpool.domain.model.states.AnnouncementHandlingState
+import hu.bme.aut.android.carpool.domain.model.states.BackendHandleState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -17,8 +18,8 @@ class AnnouncementInteractor @Inject constructor(
 
     fun saveNewAnnouncement(announcement: Announcement) = flow {
         emit(AnnouncementHandlingState.loading())
-        val announcementRef = announcementRepository.uploadAnnouncement(announcement)
-        emit(AnnouncementHandlingState.success(announcementRef))
+        announcementRepository.uploadAnnouncement(announcement)
+        emit(AnnouncementHandlingState.success("success"))
     }.catch {
         emit(AnnouncementHandlingState.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
@@ -42,5 +43,25 @@ class AnnouncementInteractor @Inject constructor(
             emit(AnnouncementHandlingState.success(announcements.first()))
         }.catch {
             emit(AnnouncementHandlingState.failed(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
+
+
+    fun updateAnnouncement(
+        announcementId: String,
+        usersListToUpdate: MutableList<String>,
+        takenSeatsNumber: Int,
+        availableSeatsNumber: Int
+    ) =
+        flow {
+            emit(BackendHandleState.loading())
+            announcementRepository.updateAnnouncement(
+                announcementId,
+                usersListToUpdate,
+                takenSeatsNumber,
+                availableSeatsNumber
+            )
+            emit(BackendHandleState.success("update success"))
+        }.catch {
+            emit(BackendHandleState.failed(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 }
