@@ -1,6 +1,7 @@
 package hu.bme.aut.android.carpool.ui.appcontent.actualities
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -13,7 +14,13 @@ import hu.bme.aut.android.carpool.domain.model.Announcement
 class ActualitiesListAdapter :
     ListAdapter<Announcement, ActualitiesListAdapter.AnnouncementViewHolder>(ItemCallBack) {
 
-    var announcements = emptyList<Announcement>()
+    private var announcements = emptyList<Announcement>()
+
+    var itemClickListener: AnnouncementClickListener? = null
+
+    interface AnnouncementClickListener {
+        fun onItemClickListener(announcement: Announcement)
+    }
 
     inner class AnnouncementViewHolder(binding: AnnouncementItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -22,6 +29,13 @@ class ActualitiesListAdapter :
         val tvTakenSeatsNumber: TextView = binding.takenSeatsNumber
         var tvFreeSeatsNumber: TextView = binding.freeSeatsNumber
         var announcement: Announcement? = null
+
+        init{
+            itemView.setOnClickListener{
+                Log.i("announcementId", announcement.toString())
+                announcement?.let { itemClickListener?.onItemClickListener(it) }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AnnouncementViewHolder(

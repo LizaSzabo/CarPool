@@ -12,11 +12,13 @@ import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentActualitiesBinding
+import hu.bme.aut.android.carpool.domain.model.Announcement
 import timber.log.Timber
 
 
 @AndroidEntryPoint
-class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, ActualitiesViewModel>() {
+class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, ActualitiesViewModel>(),
+    ActualitiesListAdapter.AnnouncementClickListener {
 
     private lateinit var binding: FragmentActualitiesBinding
     override fun provideViewModel() = getViewModelFromFactory()
@@ -79,6 +81,7 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
 
     private fun setupRecyclerView() {
         actualitiesListAdapter = ActualitiesListAdapter()
+        actualitiesListAdapter.itemClickListener = this
         binding.rvActualities.layoutManager = LinearLayoutManager(context)
         binding.rvActualities.adapter = actualitiesListAdapter
     }
@@ -88,6 +91,16 @@ class ActualitiesFragment : RainbowCakeFragment<ActualitiesViewState, Actualitie
             val action =
                 ActualitiesFragmentDirections.actionActualitiesFragmentToAddAnnouncementDialog()
             findNavController().navigate(action)
+        }
+    }
+
+    override fun onItemClickListener(announcement: Announcement) {
+        announcement.id?.let {
+            findNavController().navigate(
+                ActualitiesFragmentDirections.actionActualitiesFragmentToAnnouncementDetailsFragment(
+                    announcement.id
+                )
+            )
         }
     }
 }

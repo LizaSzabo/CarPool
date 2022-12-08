@@ -34,4 +34,13 @@ class AnnouncementInteractor @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
+    fun getAnnouncement(announcementId: String) =
+        flow {
+            emit(AnnouncementHandlingState.loading())
+            val snapshot = announcementRepository.getAnnouncement(announcementId)
+            val announcements: List<Announcement> = snapshot.toObjects()
+            emit(AnnouncementHandlingState.success(announcements.first()))
+        }.catch {
+            emit(AnnouncementHandlingState.failed(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
 }

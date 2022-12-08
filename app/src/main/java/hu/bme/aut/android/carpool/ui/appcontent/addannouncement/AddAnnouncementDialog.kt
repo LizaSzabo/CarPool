@@ -105,7 +105,7 @@ class AddAnnouncementDialog :
     private fun setupSaveButton() {
         binding.buttonSave.setOnClickListener {
             val announcement = Announcement(
-                id = "",
+                id = UUID.randomUUID().toString(),
                 owner = currentUser,
                 timeOfDeparture = binding.etTime.text.toString(),
                 takenSeatsNumber = if (binding.etTakenSeatsNumber.text.toString().isNotEmpty())
@@ -120,7 +120,7 @@ class AddAnnouncementDialog :
         }
     }
 
-    private fun setupUserName(){
+    private fun setupUserName() {
         binding.tvUserName.text = currentUser.name ?: currentUser.email
     }
 }

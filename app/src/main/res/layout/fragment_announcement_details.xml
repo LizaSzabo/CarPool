@@ -21,7 +21,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usersRegisteredLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/takenSeats" />
 
         <TextView
             android:id="@+id/ownerLabel"
@@ -36,14 +36,14 @@
 
         <TextView
             android:id="@+id/ownerName"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/ownerLabel"
-            app:layout_constraintTop_toBottomOf="@+id/ownerLabel"
+            app:layout_constraintBottom_toBottomOf="@+id/ownerLabel"
+            app:layout_constraintStart_toEndOf="@+id/ownerLabel"
+            app:layout_constraintTop_toTopOf="@+id/ownerLabel"
             tools:text="Request id" />
 
         <TextView
@@ -64,10 +64,12 @@
             android:layout_marginEnd="8dp"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/timeOfDepartureLabel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/timeOfDepartureLabel"
-            app:layout_constraintTop_toBottomOf="@+id/timeOfDepartureLabel"
-            tools:text="device id" />
+            app:layout_constraintStart_toEndOf="@+id/timeOfDepartureLabel"
+            app:layout_constraintTop_toTopOf="@+id/timeOfDepartureLabel"
+            tools:text="0" />
 
         <TextView
             android:id="@+id/takenSeatsLabel"
@@ -81,7 +83,7 @@
             app:layout_constraintTop_toBottomOf="@+id/timeOfDepartureText" />
 
         <TextView
-            android:id="@+id/usersRegisteredLabel"
+            android:id="@+id/takenSeats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
