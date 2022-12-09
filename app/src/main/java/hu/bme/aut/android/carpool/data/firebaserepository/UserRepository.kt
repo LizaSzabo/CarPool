@@ -1,6 +1,5 @@
 package hu.bme.aut.android.carpool.data.firebaserepository
 
-import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import hu.bme.aut.android.carpool.domain.model.User
@@ -21,5 +20,10 @@ class UserRepository @Inject constructor() {
     suspend fun updateUserGroup(email: String, group: MutableList<String>) {
         FirebaseFirestore.getInstance().collection("users").document(email)
             .update("group", group).await()
+    }
+
+    suspend fun updateUserImage(email: String, bitmap: String) {
+        FirebaseFirestore.getInstance().collection("users").document(email)
+            .update("bitmap", bitmap).await()
     }
 }

@@ -10,7 +10,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -102,7 +101,6 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                 binding.profileImage.isEnabled = false
             }
             is ImageSavingError -> {
-                Log.i("ImageSavingErrorstate", "ImageSavingError")
                 Toast.makeText(activity, viewState.errorMessage, Toast.LENGTH_LONG).show()
             }
             is ImageSavingSuccess -> {

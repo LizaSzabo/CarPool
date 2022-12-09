@@ -1,5 +1,6 @@
 package hu.bme.aut.android.carpool.domain
 
+import android.graphics.Bitmap
 import com.google.firebase.firestore.ktx.toObjects
 import hu.bme.aut.android.carpool.data.firebaserepository.UserRepository
 import hu.bme.aut.android.carpool.domain.model.User
@@ -36,6 +37,16 @@ class UserInteractor @Inject constructor(
         flow {
             emit(BackendHandleState.loading())
             userRepository.updateUserGroup(emailOfUserToAdd, groupToUpdate)
+            emit(BackendHandleState.success("update success"))
+        }.catch {
+            emit(BackendHandleState.failed(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
+
+
+    fun updateUserImage(emailOfUserToAdd: String, bitmap: String) =
+        flow {
+            emit(BackendHandleState.loading())
+            userRepository.updateUserImage(emailOfUserToAdd, bitmap)
             emit(BackendHandleState.success("update success"))
         }.catch {
             emit(BackendHandleState.failed(it.message.toString()))

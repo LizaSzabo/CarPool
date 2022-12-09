@@ -1,7 +1,6 @@
 package hu.bme.aut.android.carpool.ui.appcontent.profile
 
 import android.graphics.Bitmap
-import android.util.Log
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.android.carpool.CarPoolApplication.Companion.currentUser
@@ -28,11 +27,12 @@ class ProfileViewModel @Inject constructor(
 
     fun saveImageToUser(bitmap: Bitmap) {
         scope.launch {
-            val savingResult = currentUser.name?.let { profilePresenter.addImageToUser(it, bitmap) }
-            Log.i("savingResult", savingResult.toString())
+            val savingResult =
+                currentUser.email?.let { profilePresenter.addImageToUser(it, bitmap) }
             when {
                 savingResult == "success" -> {
                     currentUser.bitmap = bitmap
+                    viewState = ImageSavingSuccess("Image added successfully")
                 }
                 savingResult == "error" -> {
                     viewState = ImageSavingError(savingResult)
