@@ -1,6 +1,8 @@
 package hu.bme.aut.android.carpool.ui.appcontent.profile
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.android.carpool.CarPoolApplication.Companion.currentUser
@@ -22,10 +24,12 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun switchToSavedMode() {
-        viewState = ProfileSuccessfullyEditedState
+        viewState = ProfileSuccessfullyEditedState(currentUser)
     }
 
     fun saveImageToUser(bitmap: Bitmap) {
+        viewState = LoadingState
+
         scope.launch {
             val savingResult =
                 currentUser.email?.let { profilePresenter.addImageToUser(it, bitmap) }
@@ -40,6 +44,22 @@ class ProfileViewModel @Inject constructor(
                 savingResult?.contains("error") == true -> {
                     viewState = ImageSavingError(savingResult)
                 }
+            }
+        }
+    }
+
+    fun loadUserDetails() {
+        viewState = LoadingState
+
+        scope.launch {
+            val userImageAsString = currentUser.name?.let { profilePresenter.getUserImage(it) }
+            val decodedString: ByteArray = Base64.decode(userImageAsString, Base64.DEFAULT)
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            currentUser.bitmap = decodedByte
+
+            viewState = when (currentUser) {
+                null -> LoadingError("Network error")
+                else -> ProfileSuccessfullyEditedState(currentUser)
             }
         }
     }

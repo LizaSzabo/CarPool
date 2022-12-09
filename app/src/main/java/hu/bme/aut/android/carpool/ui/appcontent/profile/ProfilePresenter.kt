@@ -32,6 +32,24 @@ class ProfilePresenter @Inject constructor(
         return updateMessage
     }
 
+    suspend fun getUserImage(userName: String): String? {
+        var userId: String? = "-1"
+        userInteractor.getUserImage(userName).collect { state ->
+            userId = when (state) {
+                is BackendHandleState.Loading -> {
+                    null
+                }
+                is BackendHandleState.Success -> {
+                    state.data.toString()
+                }
+                is BackendHandleState.Failed -> {
+                    null
+                }
+            }
+        }
+        return userId
+    }
+
 
     private fun encodeImage(bm: Bitmap): String? {
         val byteArrayOutputStream = ByteArrayOutputStream()

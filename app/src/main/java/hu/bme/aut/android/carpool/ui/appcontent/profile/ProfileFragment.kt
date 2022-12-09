@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,11 +84,13 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                 binding.userNameEditText.visibility = View.INVISIBLE
                 binding.userNameText.visibility = View.VISIBLE
                 binding.profileImage.isEnabled = false
+                binding.loading.isVisible = false
             }
             is ProfileEditingState -> {
                 binding.userNameEditText.visibility = View.VISIBLE
                 binding.userNameText.visibility = View.INVISIBLE
                 binding.profileImage.isEnabled = true
+                binding.loading.isVisible = false
                 binding.userNameEditText.setText("add User Name")
                 if (currentUser.name?.isEmpty() == true) {
                     binding.userNameEditText.setText("add User Name")
@@ -99,12 +102,23 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                 binding.userNameEditText.visibility = View.INVISIBLE
                 binding.userNameText.visibility = View.VISIBLE
                 binding.profileImage.isEnabled = false
+                binding.profileImage.setImageBitmap(viewState.user.bitmap)
+                binding.loading.isVisible = false
             }
             is ImageSavingError -> {
                 Toast.makeText(activity, viewState.errorMessage, Toast.LENGTH_LONG).show()
+                binding.loading.isVisible = false
             }
             is ImageSavingSuccess -> {
                 Toast.makeText(activity, viewState.successMessage, Toast.LENGTH_LONG).show()
+                binding.loading.isVisible = false
+            }
+            is LoadingError -> {
+                Toast.makeText(activity, viewState.errorMessage, Toast.LENGTH_LONG).show()
+                binding.loading.isVisible = false
+            }
+            LoadingState -> {
+                binding.loading.isVisible = true
             }
         }
     }
@@ -122,6 +136,8 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.loadUserDetails()
 
         binding.editProfileButton.setOnClickListener {
             if (!binding.editProfileButton.isChecked) {

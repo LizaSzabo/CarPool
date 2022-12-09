@@ -1,6 +1,5 @@
 package hu.bme.aut.android.carpool.domain
 
-import android.graphics.Bitmap
 import com.google.firebase.firestore.ktx.toObjects
 import hu.bme.aut.android.carpool.data.firebaserepository.UserRepository
 import hu.bme.aut.android.carpool.domain.model.User
@@ -28,6 +27,16 @@ class UserInteractor @Inject constructor(
         emit(BackendHandleState.loading())
         val users: List<User> = userRepository.getUser(userName).toObjects()
         emit(BackendHandleState.success(users.first()))
+    }.catch {
+        emit(BackendHandleState.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun getUserImage(userName: String) = flow {
+        emit(BackendHandleState.loading())
+        val users = userRepository.getUser(userName).first().data as Map<*, *>
+        val image = users["bitmap"]
+        emit(BackendHandleState.success(image))
     }.catch {
         emit(BackendHandleState.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
