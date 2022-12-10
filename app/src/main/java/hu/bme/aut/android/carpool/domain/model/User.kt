@@ -9,4 +9,6 @@ data class User(
     var bitmap: Bitmap? = null,
     val hasTodayAnnouncement: Boolean? = null,
     var group: MutableList<String> = mutableListOf(),
+    val ownAnnouncementId: String? = null,
+    val registeredAnnouncementId: String? = null,
 )
