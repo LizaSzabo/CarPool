@@ -26,4 +26,9 @@ class UserRepository @Inject constructor() {
         FirebaseFirestore.getInstance().collection("users").document(email)
             .update("bitmap", bitmap).await()
     }
+
+    suspend fun addUserAnnouncement(email: String, announcementId: String) {
+        FirebaseFirestore.getInstance().collection("users").document(email)
+            .update("ownAnnouncementId", announcementId).await()
+    }
 }

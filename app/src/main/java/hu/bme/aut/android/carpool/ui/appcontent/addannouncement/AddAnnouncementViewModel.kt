@@ -19,9 +19,19 @@ class AddAnnouncementViewModel @Inject constructor(
     fun saveNewAnnouncement(announcement: Announcement) {
         scope.launch {
             viewState = when (addAnnouncementPresenter.saveNewAnnouncement(announcement)) {
-                1 -> AddAnnouncementSaving()
-                2 -> AddAnnouncementSuccess()
-                3 -> AddAnnouncementFail()
+                "saving" -> AddAnnouncementSaving()
+                "success" -> {
+                    when (announcement.id?.let {
+                        addAnnouncementPresenter.addAnnouncementToItsUser(
+                            it
+                        )
+                    }) {
+                        "saving" -> AddAnnouncementSaving()
+                        "success" -> AddAnnouncementSuccess()
+                        else -> AddAnnouncementFail()
+                    }
+                }
+                "error" -> AddAnnouncementFail()
                 else -> AddAnnouncementFail()
             }
         }

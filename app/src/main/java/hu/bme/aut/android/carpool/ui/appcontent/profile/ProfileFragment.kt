@@ -23,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.carpool.CarPoolApplication.Companion.currentUser
 import hu.bme.aut.android.carpool.R
 import hu.bme.aut.android.carpool.databinding.FragmentProfileBinding
+import hu.bme.aut.android.carpool.domain.model.Announcement
 
 @AndroidEntryPoint
 class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>() {
@@ -85,6 +86,7 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                 binding.userNameText.visibility = View.VISIBLE
                 binding.profileImage.isEnabled = false
                 binding.loading.isVisible = false
+                binding.cardView.isVisible = false
             }
             is ProfileEditingState -> {
                 binding.userNameEditText.visibility = View.VISIBLE
@@ -97,6 +99,7 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                 } else {
                     binding.userNameEditText.setText(currentUser.name)
                 }
+                binding.cardView.isVisible = true
             }
             is ProfileSuccessfullyEditedState -> {
                 binding.userNameEditText.visibility = View.INVISIBLE
@@ -104,21 +107,27 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
                 binding.profileImage.isEnabled = false
                 binding.profileImage.setImageBitmap(viewState.user.bitmap)
                 binding.loading.isVisible = false
+                if (viewState.announcement != null)
+                    setupAnnouncementDetails(viewState.announcement, viewState.titleText)
             }
             is ImageSavingError -> {
                 Toast.makeText(activity, viewState.errorMessage, Toast.LENGTH_LONG).show()
                 binding.loading.isVisible = false
+                binding.cardView.isVisible = true
             }
             is ImageSavingSuccess -> {
                 Toast.makeText(activity, viewState.successMessage, Toast.LENGTH_LONG).show()
                 binding.loading.isVisible = false
+                binding.cardView.isVisible = true
             }
             is LoadingError -> {
                 Toast.makeText(activity, viewState.errorMessage, Toast.LENGTH_LONG).show()
                 binding.loading.isVisible = false
+                binding.cardView.isVisible = false
             }
             LoadingState -> {
                 binding.loading.isVisible = true
+                binding.cardView.isVisible = false
             }
         }
     }
@@ -184,5 +193,13 @@ class ProfileFragment : RainbowCakeFragment<ProfileViewState, ProfileViewModel>(
         resultLauncher.launch(intent)
     }
 
+    private fun setupAnnouncementDetails(announcement: Announcement, titleText: String) {
+        binding.cardView.isVisible = true
+        binding.ownerName.text = announcement.owner?.name
+        binding.takenSeatsNumber.text = announcement.takenSeatsNumber.toString()
+        binding.freeSeatsNumber.text = announcement.freeSeatsNumber.toString()
+        binding.timeOfDeparture.text = announcement.timeOfDeparture.toString()
+        binding.announcementLabel.text = titleText
+    }
 
 }

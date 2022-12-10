@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeDialogFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
@@ -50,13 +51,16 @@ class AddAnnouncementDialog :
             is Initial -> {}
             is AddAnnouncementSaving -> {}
             is AddAnnouncementSuccess -> {
+                Toast.makeText(activity, "Announcement saved!", Toast.LENGTH_LONG).show()
                 findNavController().previousBackStackEntry?.savedStateHandle?.set(
                     "fromNewAnnouncement",
                     true
                 )
                 findNavController().popBackStack()
             }
-            is AddAnnouncementFail -> {}
+            is AddAnnouncementFail -> {
+                Toast.makeText(activity, "Announcement saving failed!", Toast.LENGTH_LONG).show()
+            }
         }
     }
 

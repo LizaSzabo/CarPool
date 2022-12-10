@@ -1,5 +1,6 @@
 package hu.bme.aut.android.carpool.ui.appcontent.profile
 
+import hu.bme.aut.android.carpool.domain.model.Announcement
 import hu.bme.aut.android.carpool.domain.model.User
 
 sealed class ProfileViewState()
@@ -10,7 +11,11 @@ object ProfileEditingState : ProfileViewState()
 
 object LoadingState : ProfileViewState()
 
-class ProfileSuccessfullyEditedState(val user: User) : ProfileViewState()
+class ProfileSuccessfullyEditedState(
+    val user: User,
+    val announcement: Announcement?,
+    val titleText: String
+) : ProfileViewState()
 
 class ImageSavingError(val errorMessage: String) : ProfileViewState()
 

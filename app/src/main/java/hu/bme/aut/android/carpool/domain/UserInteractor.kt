@@ -60,4 +60,13 @@ class UserInteractor @Inject constructor(
         }.catch {
             emit(BackendHandleState.failed(it.message.toString()))
         }.flowOn(Dispatchers.IO)
+
+    fun addAnnouncementToItsUser(emailOfUserToAdd: String, announcementId: String) =
+        flow {
+            emit(BackendHandleState.loading())
+            userRepository.addUserAnnouncement(emailOfUserToAdd,  announcementId)
+            emit(BackendHandleState.success("update success"))
+        }.catch {
+            emit(BackendHandleState.failed(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
 }
