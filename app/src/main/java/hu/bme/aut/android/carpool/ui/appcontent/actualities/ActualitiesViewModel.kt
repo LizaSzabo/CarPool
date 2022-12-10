@@ -29,8 +29,8 @@ class ActualitiesViewModel @Inject constructor(
             Timber.i("announcements", announcements.toString())
             viewState = when {
                 announcements == null ->  NetworkError()
-                (announcements.isNotEmpty()) -> DataReady(announcements as List<Announcement>)
-                else -> DataLoading()
+                else -> DataReady(announcements as List<Announcement>)
+               // else -> DataLoading()
             }
         }
     }
